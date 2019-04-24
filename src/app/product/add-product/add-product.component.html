@@ -1,0 +1,434 @@
+<div class="pageBoxLg">
+  <form [formGroup]="productForm" (ngSubmit)="validateProducts()">
+    <mat-tab-group class="mat-tab-fill-height" dynamicHeight (selectedIndexChange)="selectedIndexChange($event)"
+      [selectedIndex]="selectedIndex">
+      <!-- Product details-->
+      <mat-tab label="Product">
+        <div class="row rowBox">
+          <div class="col-md-6">
+            <label>
+              <input type="file" (change)="handleFileInput($event.target.files)" multiple>
+            </label>
+            <div class="alert alert-danger" *ngIf="imageError">
+              <h4>Please Select the images</h4>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pb-2" *ngFor="let url of urls">
+                <mat-card>
+                  <img class="img-fluid" [src]="url" />
+                </mat-card>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <mat-card class="p-0">
+              <mat-card-title class="">
+                <div class="card-title-text">Product Information</div>
+                <mat-divider></mat-divider>
+              </mat-card-title>
+              <mat-card-content>
+                <div fxLayout="row wrap">
+                  <div fxFlex="100" class="p-5">
+                    <div class="pb-1">
+                      <mat-form-field class="full-width">
+                        <input matInput placeholder="Product Name" formControlName="productName" required>
+                        <mat-error *ngIf="productForm.controls['productName'].errors?.required">
+                          Product Name is
+                          <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+
+                    </div>
+
+                    <div class="pb-1">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Style Code" formControlName="styleCode" required appUpperCase>
+                        <mat-error *ngIf="productForm.controls['styleCode'].errors?.required">
+                          Style Code is
+                          <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <!-- <div class="pb-1">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="SKU Code" formControlName="skuCode"
+                          (keyup)="skuCodeVerify(skuvalue.value)" appUpperCase required #skuvalue>
+                        <mat-error *ngIf="productForm.controls['skuCode'].errors?.required">
+                          SKU Code is
+                          <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                      <div *ngFor="let data of productDetail">
+                        <small *ngIf="data.skuCodeVerify">
+                          SKU Code
+                          <strong>exists</strong>
+                        </small>
+                      </div>
+
+                    </div> -->
+                    <div class="pb-1">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Manufactured Quantity" formControlName="mfdQty">
+                        <mat-error *ngIf="productForm.controls['mfdQty'].errors">
+                          Manufactured Quantity contains only
+                          <strong>number</strong>
+                        </mat-error>
+                      </mat-form-field>
+
+                    </div>
+                    <div class="pb-1">
+                      <mat-form-field class="example-full-width">
+                        <textarea matInput placeholder="Product Description"
+                          formControlName="productDescription"></textarea>
+                        <mat-error *ngIf="productForm.controls['productDescription'].errors?.required">
+                          Product Description is
+                          <strong>required</strong>
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="pb-1">
+                      <mat-form-field class="example-full-width">
+                        <textarea matInput placeholder="Bullet Points" formControlName="bulletPoints"></textarea>
+                      </mat-form-field>
+                    </div>
+                    <div class="pb-1">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="MRP" formControlName="mrp">
+                        <mat-error *ngIf="productForm.controls['mrp'].errors">
+                          MRP contains only
+                          <strong>number</strong>
+                        </mat-error>
+                      </mat-form-field>
+
+                    </div>
+                    <div class="pb-1">
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="SP" formControlName="sp">
+                        <mat-error *ngIf="productForm.controls['sp'].errors">
+                          SP contains only
+                          <strong>number</strong>
+                        </mat-error>
+                      </mat-form-field>
+
+                    </div>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Details">
+        <div class="row rowBox">
+          <div class="col-md-12">
+            <mat-card class="p-0">
+              <mat-card-title class="">
+                <div class="card-title-text"> Product Details</div>
+                <mat-divider></mat-divider>
+              </mat-card-title>
+              <mat-card-content>
+                <div fxLayout="row wrap">
+                  <div fxFlex="60" class="p-5">
+                    <div class="pb-1">
+                      <mat-form-field>
+                        <mat-select placeholder="Select the Material" formControlName="material">
+                          <mat-option *ngFor="let data of material" [value]="data">
+                            {{data}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+
+                    </div>
+                    <div class="pb-1">
+
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Item Height" formControlName="height">
+                      </mat-form-field>
+                    </div>
+                    <div class="pb-1">
+
+                      <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Item Weight" formControlName="weight">
+                      </mat-form-field>
+                    </div>
+                    <div class="pb-1">
+                      <mat-form-field>
+                        <mat-select placeholder="Select the Occassion Type" formControlName="occassion">
+                          <mat-option *ngFor="let data of occasion" [value]="data">
+                            {{data}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+
+
+                    </div>
+
+                    <div class="pb-1">
+                      <mat-form-field class="example-full-width">
+
+                        <mat-select placeholder="Select the Color" formControlName="color">
+                          <mat-option *ngFor="let data of color" [value]="data">
+                            {{data}}
+                          </mat-option>
+                        </mat-select>
+
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </mat-tab>
+      <!-- Category -->
+      <mat-tab label="Category">
+        <div class="row">
+          <div class="offset-md-3 col-md-6 offset-md-3">
+            <mat-form-field>
+              <mat-label>Category</mat-label>
+              <mat-select (selectionChange)="categorySelected($event)">
+                <mat-option *ngFor="let sup of superCategoryModel" [value]="sup">
+                  {{sup.categoryName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="offset-md-3 col-md-6 offset-md-3" *ngIf="mainCategorySelected">
+            <mat-form-field>
+              <mat-label>Main Category</mat-label>
+              <mat-select (selectionChange)="categoryMainCategory($event)">
+                <mat-option *ngFor="let main of supCategoryDetails?.mainCategory" [value]="main">
+                  {{main.mainCategoryName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="offset-md-3 col-md-6 offset-md-3" *ngIf="subCategorySelected">
+            <mat-form-field>
+              <mat-label>Sub Category</mat-label>
+              <mat-select (selectionChange)="categorySubCategory($event)">
+                <mat-option *ngFor="let sub of mainCategoryDetails?.subCategory" [value]="sub">
+                  {{sub.subCategoryName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-tab>
+      <!--Size-->
+      <mat-tab label="Size">
+        <div class="row rowBox">
+
+          <div class="col-md-12">
+            <mat-card>
+              <mat-card-title class="">
+                <div class="card-title-text"> Size Information</div>
+                <mat-divider></mat-divider>
+              </mat-card-title>
+              <mat-card-content>
+                <div fxLayout="row" fxLayout.xs="column" fxFlexFill>
+                  <div fxFlex="20" fxFlex.xs="100">
+                    <mat-radio-group class="example-radio-group">
+                      <mat-radio-button *ngFor="let moq of moqs" [value]="moq" (change)="selecteMoq($event)">
+                        {{moq }}
+                      </mat-radio-button>
+                    </mat-radio-group>
+                    <mat-form-field class="full-width">
+                      <input matInput formControlName="moqProduct" required>
+                      <mat-error *ngIf="productForm.controls['moqProduct'].errors">
+                        MOQ is
+                        <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+
+                  </div>
+                  <div fxFlex="10" fxFlex.xs="100">
+                    <div *ngFor="let data of sizeDetail; let i = index">
+                      <section>
+                        <mat-checkbox [checked]="selectedValue === i" (change)="selectedValue = i"
+                          (change)="addSize($event, data)">
+                          {{data}}
+                        </mat-checkbox>
+                      </section>
+                      <!-- <button type="button" (click)="addRegion(i)">{{region.regionName}}</button> -->
+                    </div>
+
+
+                  </div>
+                  <div fxFlex="25">
+                    <div *ngIf="sizeError">
+                      Size is already exit
+                    </div>
+                    <div *ngIf="mfgQtyError">
+                        Manufactured Qty Less
+                      </div>
+                    <mat-form-field class="full-width">
+                      <input matInput [readonly]="true" placeholder="Size" 
+                      formControlName="sizeName" #sizeName
+                        required>
+                      <mat-error *ngIf="productForm.controls['sizeName'].errors">
+                        Size only
+                        <strong>number</strong>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width">
+                      <input matInput placeholder="Quantity" formControlName="sizeQty" #sizeQty
+                      >
+                      <mat-error *ngIf="productForm.controls['sizeQty'].errors">
+                        Size only
+                        <strong>number</strong>
+                      </mat-error>
+                    </mat-form-field>
+                    <small *ngIf="skuCodeVerifyTrue">
+                      SKU Code
+                      <strong>exists</strong>
+                    </small>
+                    <mat-form-field class="full-width">
+                      <input matInput placeholder="Sku Code"
+                       (keyup)="skuCodeVerify(skuCode.value)"
+                        formControlName="skuCode" appUpperCase required #skuCode>
+                      <mat-error *ngIf="productForm.controls['skuCode'].errors?.required">
+                        SKU Code is
+                        <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+
+
+
+                    <button mat-raised-button color="accent" [disabled]="productForm.controls.sizeName.invalid || productForm.controls.sizeQty.invalid 
+                    || productForm.controls.skuCode.invalid || skuCodeVerifyTrue"
+                      (click)="selectedSize(sizeName.value, sizeQty.value, skuCode.value)" type="button">ADD</button>
+
+                    <!--    <div *ngFor="let region of sizeForms.controls;
+                let i = index">
+                      <div
+                        *ngIf="productForm.controls.sizeForms.controls[i].controls.sizeName.value=== regionSelectedSize">
+                        <div [formGroupName]="i" class="pb-1">
+                          <mat-form-field class="full-width">
+                            <input matInput [readOnly]="true" placeholder="Size" formControlName="sizeName">
+                          </mat-form-field>
+                          <mat-form-field class="full-width">
+                            <input matInput placeholder="Sku Code" formControlName="skuCode" required>
+                            <mat-error *ngIf="region.controls.skuCode.errors?.required">
+                              SKU Code is
+                              <strong>required</strong>
+                            </mat-error>
+                          </mat-form-field>
+
+                          <button mat-raised-button color="accent"
+                            [disabled]="productForm.controls.confirmRegion.controls[i].controls.skuCode.invalid"
+                            (click)="selectedCountry(productForm.controls.confirmRegion.controls[i].value,
+                      productForm.controls.confirmRegion.controls[i].controls.sizeName.value)"
+                            type="button">ADD</button>
+                        </div> 
+                      </div>
+                    </div>-->
+                  </div>
+                  <div fxFlex="40">
+                    <div fxLayout="row" class="p-2 listRow" *ngIf="confirmSize?.length > 0">
+                      <div fxFlex="20">
+                        <b>Size</b>
+                      </div>
+                      <div fxFlex="25">
+                        <b>SKU Code</b>
+                      </div>
+                      <div fxFlex="25">
+                        <b>Qty</b>
+                      </div>
+                      <div fxFlex="20">
+                        <b>Delete</b>
+                      </div>
+                    </div>
+                    <div fxLayout="row" class="p-2 alertRow" *ngFor="let data of confirmSize">
+                      <div fxFlex="20">
+                        {{data.sizeName}}
+                      </div>
+                      <div fxFlex="25">
+
+                        {{data.skuCode}}
+                      </div>
+                      <div fxFlex="25">
+                        {{data.sizeQty}}
+                      </div>
+                      <div fxFlex="20">
+                        <a (click)="deleteSize(data)">
+                          <mat-icon>delete</mat-icon>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </mat-tab>
+
+      <!--MOQ-->
+      <!-- <mat-tab label="MOQ">
+        <div class="row rowBox">
+          <div class="col-md-12">
+            <mat-card class="p-0">
+              <mat-card-content>
+                <div fxLayout="row" fxLayout.xs="column" fxFlexFill>
+                  <div fxFlex="35" fxFlex.xs="100">
+                    <mat-radio-group class="example-radio-group">
+                      <div *ngFor="let data of moqModel">
+                        <mat-card [class.active]="data.moqName  === moqName">
+                          <mat-radio-button class="example-radio-button" [value]="data"
+                            (change)="selectedMOQ($event, data)">
+                            {{data.moqName}}
+                          </mat-radio-button>
+                          <div>
+                            <small>Description: {{data.moqDescription}}</small>
+                          </div>
+                          <div>
+                            <small>Quantity: {{data.moqQuantity}}</small>
+                          </div>
+                        </mat-card>
+                      </div>
+                    </mat-radio-group>
+                  </div>
+                  <div fxFlex="10" fxFlex.xs="100">
+
+                  </div>
+                  <div fxFlex="35" fxFlex.xs="100" *ngIf="showSelectedMOQ">
+                    <mat-card-title class="">
+                      <small> Selected MOQ: {{moqName}}</small>
+                    </mat-card-title>
+
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </mat-tab> -->
+    </mat-tab-group>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-6">
+          <div>
+            <button mat-stroked-button color="primary" type="button" [hidden]="selectedIndex === 0"
+              (click)="selectPreviousTab(selectedIndex)">back</button>
+          </div>
+        </div>
+        <div class="col-md-6 col-6" *ngIf="selectedIndex !== 3">
+          <div class="float-right">
+            <button mat-raised-button type="button" color="accent" [hidden]="selectedIndex === 4"
+              (click)="selectNextTab(selectedIndex)">next</button>
+          </div>
+        </div>
+        <div class="col-md-6 col-6" *ngIf="selectedIndex === 3">
+          <div class="float-right">
+            <button mat-raised-button color="primary" type="submit">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

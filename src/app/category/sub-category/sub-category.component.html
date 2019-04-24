@@ -1,0 +1,113 @@
+<div class="pageBoxLg ">
+  <label class="pageBoxLg-label ">Sub Category</label>
+  <form [formGroup]="subCategoryForm" novalidate style="padding-top:60px">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="form-group col-sm-12 col-md-2">
+          <div class="textContainer">
+            <mat-form-field>
+              <mat-select #selectElem (selectionChange)="setNewUser(selectElem.value)" placeholder="Select Super Category">
+                <mat-option *ngFor="let category of superCategoryModel" [value]="category._id">
+                  {{category.categoryName | titlecase}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+
+        </div>
+        <div class="form-group col-sm-12 col-md-2">
+          <div class="textContainer">
+            <mat-form-field>
+              <mat-select #selectMain (selectionChange)="selectMainCategory(selectMain.value)" placeholder="Select Main Category">
+                <mat-option *ngFor="let category of mainCategoryModel" [value]="category._id">
+                  {{category.mainCategoryName | titlecase}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+
+        </div>
+        <div class="form-group col-sm-12 col-md-3">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Sub Category Name" formControlName="categoryName" required #name>
+            <button mat-button matSuffix mat-icon-button aria-label="Main Category Name">
+            </button>
+            <mat-error *ngIf="subCategoryForm.controls['categoryName'].errors?.required">
+              Sub Category Name is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+        </div>
+        <div class="form-group col-sm-12 col-md-3">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Sub Category Description" formControlName="description" #desc>
+            <button mat-button matSuffix mat-icon-button aria-label="Main Category Description">
+            </button>
+            <mat-error *ngIf="subCategoryForm.controls['description'].errors?.required">
+              Sub Category Description
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-sm-12 col-md-2">
+          <button mat-raised-button color="accent" type="submit" (click)="addSubCategory()" [disabled]='!subCategoryForm.valid'>Save</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <label>View Sub Category</label>
+        <div class="form-group col-sm-12 col-md-2">
+          <div class="textContainer">
+            <mat-form-field>
+              <mat-select #selectElem1 (selectionChange)="getCategory(selectElem1.value)" placeholder="Select super category">
+                <mat-option *ngFor="let category of superCategoryModel" [value]="category._id">
+                  {{category.categoryName | titlecase}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-group col-sm-12 col-md-2">
+          <div class="textContainer">
+            <mat-form-field>
+              <mat-select #selectMainCatVal (selectionChange)="getSubCategory(selectMainCatVal.value)" placeholder="Select main category">
+                <mat-option *ngFor="let category of mainCategoryModel" [value]="category._id">
+                  {{category.mainCategoryName | titlecase}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-12 mx-auto">
+        <table mat-table [dataSource]="subCategoryData" class="container-fluid">
+          <ng-container matColumnDef="categoryName">
+
+            <th mat-header-cell *matHeaderCellDef class="pageBoxLg-label"> Sub Category Name</th>
+            <td mat-cell *matCellDef="let element"> {{element.subCategoryName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef class="pageBoxLg-label"> Sub Category Description</th>
+            <td mat-cell *matCellDef="let element"> {{element.subCategoryDescription}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef class="pageBoxLg-label"> Delete</th>
+            <td mat-cell *matCellDef="let element"> <button mat-icon-button mat-sm-button color="primary" (click)="deleteSubCategory(element)">
+                <mat-icon>delete</mat-icon>
+              </button></td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+    </div>
+  </form>
+</div>

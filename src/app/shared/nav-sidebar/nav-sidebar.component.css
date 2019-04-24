@@ -1,0 +1,48 @@
+.spacer {
+  flex: 1 1 auto;
+}
+.mat-sidenav {
+  width: 250px;
+}
+.no-shadow {
+  box-shadow: none !important;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0px !important;
+  padding-left: 10px !important;
+}
+
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  
+  z-index: 2;
+}
+
+h1.example-app-name {
+  margin-left: 8px;
+}
+
+.example-sidenav-container {
+  
+  flex: 1;
+}
+
+.example-is-mobile .example-sidenav-container {
+  
+  flex: 1 0 auto;
+}
+mat-toolbar {
+  background-color:chocolate;
+}

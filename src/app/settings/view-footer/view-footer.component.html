@@ -1,0 +1,246 @@
+<div class="pageBoxLg ">
+  <div class="row">
+    <div class="col-md-2">
+      <label class="pageBoxLg-label "> Footer Details</label>
+    </div>
+    <div class="col-md-4">
+      <a class="pageBoxLg-label " [routerLink]="['/settings/footer']">Add Footer Details</a>
+    </div>
+  </div>
+
+  <form [formGroup]="footerEditForm" novalidate style="padding-top:60px">
+    <div class="row">
+      <div class="col-md-5 pageBoxl">
+        <div class="row" *ngFor="let data of footerModel">
+          <div class="col-md-6 " *ngIf="!data.detailsUpdate">
+            <div class="form-group col-md-12">
+              <div class="form-group">
+                <label> <b>Details</b> </label>
+
+              </div>
+            </div>
+            <div class="form-group col-md-12">
+              <div class="form-group">
+                <label> <small>Address</small> </label>
+
+              </div>
+
+            </div>
+            <div class="form-group col-md-12">
+              <div class="form-group">
+                <label> <small>Contact No</small></label>
+
+              </div>
+
+            </div>
+            <div class="form-group col-md-12">
+              <div class="form-group">
+                <label> <small>Alternative Contact No</small></label>
+
+              </div>
+
+            </div>
+            <div class="form-group col-md-12">
+              <div class="form-group">
+                <label> <small>Email ID</small></label>
+              </div>
+
+            </div>
+            <div class="form-group col-md-12">
+              <div class="form-group">
+                <label><small>Map</small></label>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-md-6" *ngFor="let data of footerModel">
+            <div *ngIf="!data.detailsUpdate">
+              <div class=" form-group col-md-12">Edit
+                <button mat-icon-button mat-sm-button color="primary" matTooltip="Edit  Details" (click)="editAddress(data)">
+                  <mat-icon> edit </mat-icon>
+                </button>
+              </div>
+              <div class=" form-group col-md-12">
+                <b><small>: {{data.address}}</small></b>
+              </div>
+              <div class=" form-group col-md-12">
+                <b><small>: {{data.contactNo}}</small></b>
+              </div>
+              <div class=" form-group col-md-12">
+                <b><small>: {{data.alternativeContactNo}}</small></b>
+              </div>
+              <div class=" form-group col-md-12">
+                <b><small>: {{data.mailId}}</small></b>
+              </div>
+              <div class=" form-group col-md-12">
+                <b> <small>: {{data.map}}</small></b>
+              </div>
+            </div>
+            <div *ngIf="data.detailsUpdate">
+              <div class=" form-group col-md-12">Update 
+                <button mat-icon-button mat-sm-button color="primary" matTooltip="Update  Details" 
+                (click)="updateDetails(id.value, address.value, contactNo.value, alternativeContactNo.value, mailId.value, map.value )">
+                  <mat-icon> save </mat-icon>
+                </button>
+
+                <button mat-icon-button mat-sm-button color="primary" matTooltip="Cancel" (click)="cancelDetails(data)">
+                  <mat-icon> clear </mat-icon>
+                </button>
+              </div>
+              <div class=" form-group col-md-12">  
+                <mat-form-field class="example-full-width">
+                    <input matInput hidden [value]="data._id" formControlName="id" #id>
+                  <input matInput placeholder="Address" [value]="data.address" formControlName="address" #address>
+                </mat-form-field>
+              </div>
+              <div class=" form-group col-md-12">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Contact Number" [value]="data.contactNo" formControlName="contactNo"
+                    #contactNo>
+                </mat-form-field>
+              </div>
+              <div class=" form-group col-md-12">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Alternative Contact Number" [value]="data.alternativeContactNo"
+                    formControlName="alternativeContactNo" #alternativeContactNo>
+                </mat-form-field>
+              </div>
+              <div class=" form-group col-md-12">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Email ID" [value]="data.mailId" formControlName="mailId" #mailId>
+                </mat-form-field>
+              </div>
+              <div class=" form-group col-md-12">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Map Source" [value]="data.map" formControlName="map" #map>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-1 "></div>
+      <div class="col-md-5 pageBoxl">
+        <div class="row" *ngFor="let data of footerModel">
+          <div class="col-md-6" *ngIf="!data.socialUpdate">
+            <div class="form-group col-md-12">
+              <div class="form-group">
+                <label> <b>Social Media Link</b> </label>
+
+              </div>
+            </div>
+            <div class="form-group col-md-12">
+              <label> <small>Instagram Link</small> </label>
+            </div>
+            <div class="form-group col-md-12">
+              <label> <small>Facebook Link</small></label>
+            </div>
+            <div class="form-group col-md-12">
+              <label> <small>Pintrest Link</small></label>
+            </div>
+            <div class="form-group col-md-12">
+              <label> <small>GooglePlus Link</small></label>
+            </div>
+            <div class="form-group col-md-12">
+              <label><small>Twitter Link</small></label>
+            </div>
+          </div>
+          <div class="col-md-6" *ngFor="let data of footerModel">
+              <div *ngIf="data.socialUpdate">
+            <div class=" form-group col-md-12">Update
+              <button mat-icon-button mat-sm-button color="primary" matTooltip="Update  Social Media Link" 
+              (click)="updateSocialDetails(id.value, instagramLink.value, facebookLink.value, pintrestLink.value, googlePlusLink.value, twitterLink.value )">
+                <mat-icon> save </mat-icon>
+              </button>
+              <button mat-icon-button mat-sm-button color="primary" matTooltip="Cancel" 
+              (click)="cancelSocialDetails(data)">
+                <mat-icon> clear </mat-icon>
+              </button>
+            </div>
+            <div class="form-group col-md-12">
+                <mat-form-field class="example-full-width">
+                    <input matInput hidden [value]="data._id" formControlName="id" #id>
+                    <input matInput placeholder="Instagram Link" formControlName="instagramLink" [value]="data.instagramLink" #instagramLink>
+                  </mat-form-field>
+            </div>
+            <div class="form-group col-md-12">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Facebook Link" [value]="data.facebookLink" formControlName="facebookLink" #facebookLink>
+                  </mat-form-field>
+            </div>
+            <div class="form-group col-md-12">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Pintrest Link" [value]="data.pintrestLink" formControlName="pintrestLink" #pintrestLink>
+                  </mat-form-field>
+            </div>
+            <div class="form-group col-md-12">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Google Plus Link" [value]="data.googlePlusLink" formControlName="googlePlusLink" #googlePlusLink>
+                  </mat-form-field>
+            </div>
+            <div class="form-group col-md-12">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Twitter Link" [value]="data.twitterLink" formControlName="twitterLink" #twitterLink>
+                  </mat-form-field>
+            </div>
+            </div>
+            <div *ngIf="!data.socialUpdate">
+                <div class=" form-group col-md-12">Edit
+                  <button mat-icon-button mat-sm-button color="primary" matTooltip="Edit Social Medai Link" (click)="editSocialMedia(data)">
+                    <mat-icon> edit </mat-icon>
+                  </button>
+                </div>
+                <div class="form-group col-md-12">
+                  <b><small>: {{data.instagramLink}}</small></b>
+                </div>
+                <div class="form-group col-md-12">
+                  <b><small>: {{data.facebookLink}}</small></b>
+                </div>
+                <div class="form-group col-md-12">
+                  <b><small>: {{data.pintrestLink}}</small></b>
+                </div>
+                <div class="form-group col-md-12">
+                  <b><small>: {{data.googlePlusLink}}</small></b>
+                </div>
+                <div class="form-group col-md-12">
+                  <b><small>: {{data.twitterLink}}</small></b>
+                </div>
+                </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" *ngFor="let data of footerModel">
+        <div *ngIf="!data.logoUpdate">
+            <label>Logo </label> <button mat-icon-button mat-sm-button color="primary" matTooltip="Edit  Logo" (click)="editLogo(data)">
+                <mat-icon> edit </mat-icon>
+              </button>
+            <div>
+              <img [src]="data.logoImageName" style="width: 280px; height: 245px;" />
+            </div>
+        </div>
+        <div *ngIf="data.logoUpdate">
+            <input matInput hidden [value]="data._id" formControlName="id" #id>
+            <label>Logo </label>
+            <div>
+              <img *ngFor="let url of urls" [src]="url" style="width: 280px; height: 245px;" />
+            </div>
+            <div>
+              <input type="file" name="file" class="btn btnPink btn-block" id="file"  (change)="handleFileInput($event.target.files)">
+            </div> 
+            <div>
+                <button mat-icon-button mat-sm-button color="primary" matTooltip="Update  Logo " 
+                (click)="updateLogo(id.value)">
+                  <mat-icon> save </mat-icon>
+                </button>
+                <button mat-icon-button mat-sm-button color="primary" matTooltip="Cancel Logo" 
+                (click)="cancelLogo(data)">
+                  <mat-icon> clear </mat-icon>
+                </button>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+  </form>
+</div>

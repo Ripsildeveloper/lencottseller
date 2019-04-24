@@ -1,0 +1,97 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar class="nav-color" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="example-app-name"></h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
+      <mat-accordion multi="true" >
+
+        <mat-expansion-panel class="no-shadow">
+          <mat-expansion-panel-header fxLayout="row" >
+            <mat-panel-title>
+            Category
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-nav-list class="ml-0" dense>
+            <mat-list-item routerLink="/category/supercategory">
+              <a>Super Category</a>
+            </mat-list-item>
+            <mat-list-item routerLink="/category/maincategory">
+              <a >Main Category</a>
+            </mat-list-item>
+            <mat-list-item routerLink="/category/subcategory">
+              <a >Sub Category</a>
+            </mat-list-item>
+          </mat-nav-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="no-shadow">
+          <mat-expansion-panel-header fxLayout="row" >
+            <mat-panel-title>
+             Product
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-nav-list class="ml-0" dense>
+            <mat-list-item routerLink="/product/addproducts">
+              <a>Upload Product</a>
+            </mat-list-item>
+            <mat-list-item routerLink="/product/viewproducts">
+              <a >Manage Products</a>
+            </mat-list-item>
+          </mat-nav-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="no-shadow">
+          <mat-expansion-panel-header fxLayout="row" >
+            <mat-panel-title>
+             Settings
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-nav-list class="ml-0" dense>
+             
+            <mat-list-item routerLink="/settings/viewbanners">  
+              <a>Banners</a>
+            </mat-list-item>
+            <mat-list-item  routerLink="/settings/viewpromotions">
+              <a>Promotions</a>
+            </mat-list-item>
+            <mat-list-item  routerLink="/settings/viewhotproducts">   <!--ads component used for hot products-->
+              <a>Hot Products</a>
+            </mat-list-item>
+            <mat-list-item  routerLink="/settings/header">
+              <a>Header</a>
+            </mat-list-item>
+            <mat-list-item  routerLink="/settings/viewfooter">
+              <a>Footer</a>
+            </mat-list-item>
+            <mat-list-item  routerLink="/settings/products">
+              <a>Product Settings</a>
+            </mat-list-item>
+          </mat-nav-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="no-shadow">
+          <mat-expansion-panel-header fxLayout="row" >
+            <mat-panel-title>
+             MOQ
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-nav-list class="ml-0" dense>
+             
+      <mat-list-item routerLink="/moq/viewmoq">  
+              <a>View MOQ</a>
+            </mat-list-item>
+            <mat-list-item  routerLink="/moq/createmoq">
+              <a>Add MOQ</a>
+            </mat-list-item>
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

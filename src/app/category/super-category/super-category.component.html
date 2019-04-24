@@ -1,0 +1,69 @@
+<div class="pageBoxLg ">
+  <label class="pageBoxLg-label ">Super Category</label>
+  <form [formGroup]="superCategoryForm" novalidate style="padding-top:60px">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="form-group col-md-4 col-sm-12">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Super Category Name" formControlName="categoryName" required #name >
+            <button mat-button matSuffix aria-label="Super Category Name">
+            </button>
+            <mat-error *ngIf="superCategoryForm.controls['categoryName'].errors?.required">
+              Super Category Name is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <div *ngFor="let data of superCategoryFilter"> 
+              <div *ngIf="data.checkCategoryName">
+                  <small style="color: red">Super Category Name already <strong>exists</strong></small>
+                </div>
+          </div>
+          
+        </div>
+        <div class="form-group col-md-4 col-sm-12">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Super Category Description" formControlName="description" #desc>
+            <button mat-button matSuffix aria-label="Super Category Description">
+            </button>
+            <mat-error *ngIf="superCategoryForm.controls['description'].errors?.required">
+              Super Category Description
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        
+        <div class="form-group col-md-2 col-sm-12" >
+          <button mat-raised-button color="accent" type="button" (click)="addSuperCategory()" [disabled]='checKCategoryName  || !superCategoryForm.valid'>Save</button>
+          <br>
+        </div>
+
+
+      </div>
+      <div class="row">
+        <div class="col-md-12 mx-auto">
+          <table mat-table [dataSource]="superCategoryData" class="container-fluid ">  
+            <ng-container matColumnDef="categoryName">
+
+              <th mat-header-cell *matHeaderCellDef class="pageBoxLg-label"> Category Name</th>
+              <td mat-cell *matCellDef="let element"> {{element.categoryName }} </td>
+             
+            </ng-container>
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef class="pageBoxLg-label"> Description</th>
+              <td mat-cell *matCellDef="let element"> {{element.categoryDescription}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef class="pageBoxLg-label"> Delete</th>
+              <td mat-cell *matCellDef="let element"> <button mat-icon-button mat-sm-button color="primary" (click)="deleteSuperCategory(element)">
+                  <mat-icon>delete</mat-icon>
+                </button></td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,225 @@
+<div class="pageBoxLg ">
+  <div class="row">
+    <div class="col-md-2">
+      <label class="pageBoxLg-label "> Product Settings</label>
+    </div>
+  </div>
+
+  <form [formGroup]="productSettingsForm" novalidate style="padding-top:60px">
+    <div class="row">
+      <div class="col-md-5 pageBoxl">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="pageBoxLg-label "> Price Range </label>
+          </div>
+          <div class="col-md-6">
+            <a matTooltip="Add Price Range" (click)="createPriceRange()">
+              <mat-icon>add</mat-icon>
+            </a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-4" *ngIf="showFormControl">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Price Range Minimum" formControlName="priceRangeMinimum">
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-4" *ngIf="showFormControl">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Price Range Maximum" formControlName="priceRangeMaximum">
+            </mat-form-field>
+          </div>
+          <div class="col-md-1" *ngIf="showFormControl">
+            <button mat-icon-button mat-sm-button color="primary" matTooltip="Save" (click)="savePriceRange()">
+              <mat-icon> save </mat-icon>
+            </button>
+          </div>
+          <div class="col-md-1" *ngIf="showFormControl">
+            <button mat-icon-button mat-sm-button color="primary" matTooltip="Cancel" (click)="cancelPriceRange()">
+              <mat-icon> clear </mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="row"  *ngFor="let data of settingsModelData">
+        
+            <div class="col-md-12"  *ngFor="let val of data.priceRange">
+             
+                <h6>{{val}}</h6>
+                <button mat-icon-button mat-sm-button color="primary" matTooltip="delete" (click)="deletePriceRange(val)">
+                    <mat-icon> delete </mat-icon>
+                  </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1 ">
+      </div>
+
+
+      <div class="col-md-5 pageBoxl">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="pageBoxLg-label "> Color</label>
+          </div>
+          <div class="col-md-6">
+            <a matTooltip="Add Color" (click)="createColor()">
+              <mat-icon>add</mat-icon>
+            </a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-7" *ngIf="showColorForm">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Color" formControlName="color">
+            </mat-form-field>
+          </div>
+          <div class="col-md-1" *ngIf="showColorForm">
+            <button mat-icon-button mat-sm-button color="primary" matTooltip="Save" (click)="saveColor()">
+              <mat-icon> save </mat-icon>
+            </button>
+          </div>
+          <div class="col-md-1" *ngIf="showColorForm">
+            <button mat-icon-button mat-sm-button color="primary" matTooltip="Cancel" (click)="cancelColor()">
+              <mat-icon> clear </mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngFor="let data of settingsModelData">
+              <div *ngFor="let val of data.color">
+                  <h6>{{val}}</h6>
+                  <button mat-icon-button mat-sm-button color="primary" matTooltip="delete" (click)="deleteColor(val)">
+                      <mat-icon> delete </mat-icon>
+                    </button>
+                </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 pageBoxl">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="pageBoxLg-label "> Material</label>
+          </div>
+          <div class="col-md-6">
+            <a matTooltip="Add Material" (click)="createMaterial()">
+              <mat-icon>add</mat-icon>
+            </a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-7" *ngIf="showMaterialControl">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Material " formControlName="material">
+            </mat-form-field>
+          </div>
+          <div class="col-md-1" *ngIf="showMaterialControl">
+            <button mat-icon-button mat-sm-button color="primary" matTooltip="Save" (click)="saveMaterial()">
+              <mat-icon> save </mat-icon>
+            </button>
+          </div>
+          <div class="col-md-1" *ngIf="showMaterialControl">
+            <button mat-icon-button mat-sm-button color="primary" matTooltip="Cancel" (click)="cancelMaterial()">
+              <mat-icon> clear </mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngFor="let data of settingsModelData">
+              <div *ngFor="let val of data.material">
+                <h6>{{val}}</h6>  
+                  <button mat-icon-button mat-sm-button color="primary" matTooltip="delete" (click)="deleteMaterial(val)">
+                      <mat-icon> delete </mat-icon>
+                    </button>
+                </div> 
+          </div>
+        </div>
+      </div>
+      <div class="col-md-1 ">
+      </div>
+      <!--Occasion-->
+      <div class="col-md-5 pageBoxl">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="pageBoxLg-label">Occasion Type</label>
+          </div>
+          <div class="col-md-6">
+            <a matTooltip="Add Occasion" (click)="createOccasion()">
+              <mat-icon>add</mat-icon>
+            </a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-7" *ngIf="showOccasionControl">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Occasion " formControlName="occasion">
+            </mat-form-field>
+          </div>
+          <div class="col-md-1" *ngIf="showOccasionControl">
+            <button mat-icon-button mat-sm-button color="primary" matTooltip="Save" (click)="saveOccasion()">
+              <mat-icon> save </mat-icon>
+            </button>
+          </div>
+          <div class="col-md-1" *ngIf="showOccasionControl">
+            <button mat-icon-button mat-sm-button color="primary" matTooltip="Cancel" (click)="cancelOccasion()">
+              <mat-icon> clear </mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngFor="let data of settingsModelData">
+              <div *ngFor="let val of data.occasion">
+                <h6>{{val}}</h6>  
+                  <button mat-icon-button mat-sm-button color="primary" matTooltip="delete" (click)="deleteOccasion(val)">
+                      <mat-icon> delete </mat-icon>
+                    </button>
+                </div> 
+          </div>
+        </div>
+      </div>
+      <!--Size-->
+      <div class="col-md-5 pageBoxl">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="pageBoxLg-label "> Size</label>
+          </div>
+          <div class="col-md-6">
+            <a matTooltip="Add Occasion" (click)="createSize()">
+              <mat-icon>add</mat-icon>
+            </a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-7" *ngIf="showSizeControl">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Size " formControlName="size">
+            </mat-form-field>
+          </div>
+          <div class="col-md-1" *ngIf="showSizeControl">
+            <button mat-icon-button mat-sm-button color="primary" matTooltip="Save" (click)="saveSize()">
+              <mat-icon> save </mat-icon>
+            </button>
+          </div>
+          <div class="col-md-1" *ngIf="showSizeControl">
+            <button mat-icon-button mat-sm-button color="primary" matTooltip="Cancel" (click)="cancelSize()">
+              <mat-icon> clear </mat-icon>
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div *ngFor="let data of settingsModelData">
+              <div *ngFor="let val of data.size">
+                <h6>{{val}}</h6>  
+                  <button mat-icon-button mat-sm-button color="primary" matTooltip="delete" (click)="deleteSize(val)">
+                      <mat-icon> delete </mat-icon>
+                    </button>
+                </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

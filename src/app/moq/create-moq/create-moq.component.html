@@ -1,0 +1,43 @@
+<div class="pageBoxLg ">
+  <label class="pageBoxLg-label ">Create MOQ</label>
+  <form [formGroup]="moqForm" novalidate style="padding-top:60px">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="form-group col-md-6">
+            <label >MOQ Details</label>
+          <div class="form-group col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="MOQ Name" formControlName="moqName" required >
+              <mat-error *ngIf="moqForm.controls['moqName'].errors?.required">
+                MOQ Name
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="MOQ Description" formControlName="moqDescription" required>
+              <mat-error *ngIf="moqForm.controls['moqDescription'].errors?.required">
+                MOQ Description
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-12">
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="MOQ Quantity" formControlName="moqQuantity" required></textarea>
+              <mat-error *ngIf="moqForm.controls['moqQuantity'].errors?.required">
+               Quantity is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-12">
+              <button mat-raised-button color="accent" type="submit"  (click) ="createMoq()" [disabled]='!moqForm.valid'>Save</button> <br>
+            </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+

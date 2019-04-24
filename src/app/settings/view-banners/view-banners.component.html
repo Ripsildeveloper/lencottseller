@@ -1,0 +1,41 @@
+<div class="pageBoxLg ">
+   
+    <div class="row">
+<div class="col-md-2">
+    <label class="pageBoxLg-label "> Banners</label>
+</div>
+<div class="col-md-4">
+    <a class="pageBoxLg-label " [routerLink]="['/settings/addbanners']">Add Banners</a>
+</div>
+    </div>
+    <div class="row">
+        <table mat-table [dataSource]="bannerData" class="container-fluid ">
+            <ng-container matColumnDef="bannerName">
+                <th mat-header-cell *matHeaderCellDef> Banner Image</th>
+                <td mat-cell *matCellDef="let element"> 
+                <img [src]="element.bannerImage"  style="width: 280px; height: 145px;" /> </td>
+              </ng-container>
+            <ng-container matColumnDef="bannerPosition">
+              
+              <th mat-header-cell *matHeaderCellDef >  Banner Position</th>
+              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              
+              <th mat-header-cell *matHeaderCellDef >  Status</th>
+              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+                <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef >Delete </th>
+                    <td mat-cell *matCellDef="let element">  <button mat-icon-button mat-sm-button color="primary"
+                      (click)="deleteBanners(element)">
+                      <mat-icon>  delete sweep icon </mat-icon>
+                    
+                     </button> </td>
+                  </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+    </div>
+   
+    </div>

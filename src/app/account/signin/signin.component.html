@@ -1,0 +1,35 @@
+<form class="pageBox" [formGroup]="signInForm" (ngSubmit)="signin()"
+ novalidate style="padding-top:60px">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="User Name" formControlName="userName" required #name>
+            <button mat-button matSuffix mat-icon-button aria-label="User Name">
+            </button>
+            <mat-error *ngIf="signInForm.controls['userName'].errors?.required">
+              UserName is
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Password" formControlName="password" required #pwd>
+              <button mat-button matSuffix mat-icon-button aria-label="User Name">
+              </button>
+              <mat-error *ngIf="signInForm.controls['password'].errors?.required">
+                Password is
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div *ngIf="pwdError">
+UserName or Password is incorrect
+          </div>
+          <button mat-raised-button color="accent" type="submit" [disabled]='!signInForm.valid'>Sign In</button> <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

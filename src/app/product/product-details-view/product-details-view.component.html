@@ -1,0 +1,184 @@
+<form [formGroup]="editProductForm" >
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 col-12">
+      <label class="productHeading">
+        Product Name
+      </label>
+    </div>
+    <div class="col-md-12 col-12">
+      <h4 class="p-2">
+        {{productModel?.productName | titlecase}}
+      </h4>
+    </div>
+    <div class="col-md-6 col-6" >
+      <label class="productHeading" *ngIf="mainCatergoryName !== undefined">
+        Product Category
+      </label>
+    </div>
+    <div class="col-md-6 col-6" >
+      <h4 class="p-2" *ngIf="mainCatergoryName !== undefined">
+        {{mainCatergoryName | titlecase}}
+      </h4>
+    </div>
+    <div class="col-md-6 col-6">
+      <label class="productHeading">
+        Product SKU
+      </label>
+    </div>
+    <div class="col-md-6 col-6" >
+      <h6 class="p-2">
+        {{productModel?.skuCode}}
+      </h6>
+    </div>
+    <div class="col-md-6 col-6">
+      <label class="productHeading" *ngIf="productModel?.mfdQty !== undefined">
+       Manufactured Quantity
+      </label>
+    </div>
+    <div class="col-md-4 col-6" *ngIf="!editMfdQty">
+      <h6 class="p-2" *ngIf="productModel?.mfdQty !== undefined">
+        {{productModel?.mfdQty}}
+        <button mat-icon-button mat-sm-button color="primary" matTooltip="Edit Manufacturing Quantity"
+                  (click)="editMfdQty(productModel)">
+                  <mat-icon>  edit </mat-icon>
+                  </button>
+      </h6>
+      
+    </div>
+    <div class="col-md-4 col-6" *ngIf="editMfdQty">
+      <div class="row">
+          <div class="col-md-4">
+              <h6 class="p-2" >
+                  
+                      <input class="form-control"  type="text" formControlName="editMfdQty" [value]="productModel?.mfdQty" #qty>
+               
+              </h6>
+          </div>
+          <div class="col-md-4">
+              <button mat-icon-button mat-sm-button color="primary" matTooltip="Update Manufacturing Quantity"
+              (click)="updateMfdQty(productModel, qty )">
+              <mat-icon>  save </mat-icon>
+              </button>
+           </div>
+           <div class="col-md-4">
+              <button mat-icon-button mat-sm-button color="primary" matTooltip="Cancel"
+              (click)="cancelMfdQty(productModel, qty )">
+              <mat-icon>  cancel </mat-icon>
+              </button>
+           </div>
+      </div>
+     
+      
+        
+      </div>
+    <div class="col-md-12">
+      <label class="productHeading" *ngIf="productModel?.region.length !== 0">
+        Product Price
+      </label>
+    </div>
+    <div class="col-md-12" *ngIf="productModel?.region.length !== 0">
+      <div class="row p-2 regionMainRow">
+        <div class="col-3 col-sm-3 col-md-3">
+          Region Name 
+        </div>
+        <div class="col-3 col-sm-3  col-md-3">
+          Price
+        </div>
+        <div class="col-3 col-sm-3  col-md-3">
+          Quantity
+        </div>
+      </div>
+      <div  *ngFor="let data of productModel?.region">
+        <div class="row p-2 regionRow" *ngIf="!data.qtyediting">
+            <div class="col-3 col-sm-3 col-md-3">
+                {{data?.regionName}}
+              </div>
+              <div *ngIf="!data.qtyediting" class="col-3 col-sm-3  col-md-3">
+                {{data?.regionPrice}}
+              </div>
+              <div *ngIf="!data.qtyediting" class="col-3 col-sm-3  col-md-3">
+                {{data?.regionQuantity}}
+              </div>
+             
+              <div  class="col-3 col-sm-3  col-md-3">
+                  <button mat-icon-button mat-sm-button color="primary" matTooltip="Edit  Price or Quantity"
+                  (click)="editQty(data)">
+                  <mat-icon>  edit </mat-icon>
+                  </button>
+                </div>
+        </div>
+        <div *ngIf="data.qtyediting" class="row p-2 regionRow">
+            <div class="col-md-3 form-group">
+                <input class="form-control"  hidden type="text" formControlName="regionName" [value]="data?.regionName" #name>
+                {{data.regionName}}
+            </div>
+            <div  class="col-3 col-sm-3  col-md-3 form-group">
+                    
+                        <input class="form-control"  type="text" formControlName="editPrice" [value]="data?.regionPrice" #price>
+                </div>
+                <div class="col-md-3 form-group">
+                        <input class="form-control"  type="text" formControlName="editQty" [value]="data?.regionQuantity" #qty>
+                </div>
+                <div class="col-md-1">
+                    <button mat-icon-button mat-sm-button color="primary" matTooltip="Update the Price Or Quantity "
+                    (click)="update(data, productModel, name.value, price.value, qty.value  )">
+                    <mat-icon>  save </mat-icon>
+                    </button>
+                 </div>
+                 <div class="col-md-1">
+                    <button mat-icon-button mat-sm-button color="primary" matTooltip="cancel "
+                    (click)="cancel(data)">
+                    <mat-icon>  cancel </mat-icon>
+                    </button>
+                 </div>
+                
+         
+           
+            
+            </div>
+        
+      </div>
+         
+      
+    </div>
+    <div class="col-md-6 col-6" >
+      <label class="productHeading" *ngIf="productModel?.productDescription !== ''">
+        Product Description
+      </label>
+    </div>
+    <div class="col-md-6 col-6" >
+      <h6 style="white-space: pre-line; line-height: 20px" *ngIf="productModel?.productDescription !== ''">
+        {{productModel?.productDescription}}
+      </h6>
+    </div>
+    <div class="col-md-6 col-6" >
+      <label class="productHeading" *ngIf="productModel?.length !== '' || productModel?.breadth !== '' ||
+      productModel?.height !== ''">
+        Product Size
+      </label>
+    </div>
+    <div class="col-md-6 col-6">
+      <h6 *ngIf="productModel?.length !== ''"><label >Length</label>: {{productModel?.length}}</h6>
+      <h6 *ngIf="productModel?.breadth !== ''"><label>Breadth</label>: {{productModel?.breadth}}</h6>
+      <h6 *ngIf="productModel?.height !== ''"><label>Height</label>: {{productModel?.height}}</h6>
+    </div>
+    <div class="col-md-6 col-6">
+      <label class="productHeading" *ngIf="productModel?.material !== '' || productModel?.waterProof !== '' ||
+      productModel?.laptopSize !== '' ||  productModel?.closure !== '' ||  productModel?.compartments !== '' || 
+       productModel?.pockets !== ''">
+        Product Details
+      </label>
+    </div>
+    <div class="col-md-6 col-6">
+      <h6 *ngIf="productModel?.material !== ''"><label>Material</label>: {{productModel?.material}}</h6>
+      <h6 *ngIf="productModel?.waterProof !== ''"><label>WaterProof</label>: {{productModel?.waterProof}}</h6>
+      <h6 *ngIf="productModel?.laptopSize !== ''"><label>LaptopSize</label>: {{productModel?.laptopSize}}</h6>
+      <h6 *ngIf="productModel?.closure !== ''"><label>Closure</label>: {{productModel?.closure}}</h6>
+      <h6 *ngIf="productModel?.compartments !== ''"><label>Compartments</label>: {{productModel?.compartments}}</h6>
+      <h6 *ngIf="productModel?.pockets !== ''"><label>Pockets</label>: {{productModel?.pockets}}</h6>
+    </div>
+  </div>
+</div>
+  
+</form>

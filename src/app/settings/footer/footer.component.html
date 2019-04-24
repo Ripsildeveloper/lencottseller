@@ -1,0 +1,83 @@
+<div class="pageBoxLg ">
+  <label class="pageBoxLg-label ">Add Footer Details
+  </label>
+  <form [formGroup]="footerForm" novalidate style="padding-top:60px">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="form-group col-md-6">
+
+          <label> Details</label>
+          <div class="form-group col-md-12">
+            <mat-form-field class="example-full-width">
+              <textarea matInput placeholder="Address" formControlName="address"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Contact Number" formControlName="contactNo">
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Alternative Contact Number" formControlName="alternativeContactNo">
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Email ID" formControlName="mailId">
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-12">
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Map Source" formControlName="map">
+              </mat-form-field>
+            </div>
+         
+        </div>
+        <div class="form-group col-md-6">
+
+          <label> Social Media Links</label>
+          <div class="form-group col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Instagram Link" formControlName="instagramLink">
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Facebook Link" formControlName="facebookLink">
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Pintrest Link" formControlName="pintrestLink">
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Google Plus Link" formControlName="googlePlusLink">
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-12">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Twitter Link" formControlName="twitterLink">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Logo </label>
+            <div>
+              <img *ngFor="let url of urls" [src]="url" style="width: 100px; height: 50px;"/>
+            </div>
+            <div>
+              <input type="file" name="file" class="btn btnPink btn-block" id="file"  (change)="handleFileInput($event.target.files)">
+            </div>
+            <div class="form-group col-md-12">
+
+                <button mat-raised-button color="accent" type="submit" (click)="addFooter()" [disabled]='!footerForm.valid'>Save</button>
+                <br>
+              </div>
+          </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,26 @@
+.pageBoxl {
+  border: 1px solid blueviolet;
+  margin: 10px 10px 10px 10px;
+  padding:20px;
+  position: relative;
+  background: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.pageBoxLg {
+  border: 1px solid blueviolet;
+  margin: 20px 20px 20px 20px;
+  padding: 20px;
+  position: relative;
+  background: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.pageBoxLg-label {
+  background: rosybrown;
+  margin: 0px 0px 0px 20px;
+  font-size: 14px;
+  padding: 2px  20px  2px 20px;
+  color: white;
+  transition: padding 3s;
+  -moz-transition: padding 3s;
+  -webkit-transition: padding 3s;
+}

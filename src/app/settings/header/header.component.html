@@ -1,0 +1,28 @@
+<div class="pageBoxLg ">
+  <label class="pageBoxLg-label ">Add Header Details
+  </label>
+  <form [formGroup]="headerForm" novalidate style="padding-top:60px">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label class="pageBoxLg-label ">Logo</label>
+          <div>
+            <img *ngFor="let url of urls" [src]="url" style="width: 280px; height: 245px;" />
+          </div>
+          <div>
+            <input type="file" name="file" class="btn btnPink btn-block" id="file"
+              (change)="handleFileInput($event.target.files)">
+          </div>
+          <button mat-raised-button color="accent" type="submit" (click)="addTemplate()"
+            [disabled]='!headerForm.valid'>Save</button>
+        </div>
+        <div class="form-group col-md-6">
+          <label class="pageBoxLg-label "> Current Logo</label>
+          <div class="form-group col-md-12">
+            <img *ngFor="let url of headerModel" [src]="url.logoImageName" style="width: 100px; height: 50px;" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

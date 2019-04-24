@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+          <mat-card>
+            <div *ngIf="!primeHide">
+              <img [src]="productModel?.productImageName[0]" class="img-fluid" style="height: 500px; width: 500px">
+            </div>
+            <div *ngIf="showImages">
+              <img [src]="selectedImg"
+               class="img-fluid" style="height: 500px; width: 500px">
+            </div>
+          </mat-card>
+        </div>
+        <div class="col-3 col-sm-3 col-md-3 col-lg-3" 
+        *ngFor="let data of productModel?.productImageName">
+          <mat-card [ngClass]="{'activeImg' : selectedSmallImg === data}"><a>
+            <img (mouseover)="clickImg(data)" [src]="data"
+                class="img-fluid" style="max-height: 100px"></a>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 detailsView">
+      <app-product-details-view [mainCatergoryName]="mainCatergoryName" 
+      [productModel]="productModel" >
+
+      </app-product-details-view>
+    </div>
+  </div>
+  <div class="row gridRow">
+    <div class="col-12 col-md-12 col-lg-12">
+      <h2 class="relatedSection">Variants</h2>
+    </div>
+    <div class="col-6 col-sm-3 col-md-3 col-lg-3 pointerImage"
+     *ngFor="let data of relatedProducts">
+      <a (click)="relatedProduct(data)">
+        <img class="img-fluid" [src]="data.productImageName[0]" >
+      </a>
+    </div>
+  </div>
+</div>
